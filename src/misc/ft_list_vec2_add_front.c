@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_list_vec2_add_front.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 07:07:27 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 19:37:16 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/22 18:44:10 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/22 18:52:46 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(void)
+void	ft_list_vec2_add_front(t_list_vec2 **list, t_vec2 vec)
 {
-	t_data	data;
+	t_list_vec2	*new;
 
-	ft_data_init(&data);
-	ft_parse(&data, "map.ber");
-	ft_game_init(&data);
-	//mlx_loop(data.mlx);
+	new = malloc(sizeof(t_list_vec2));
+	if (!new)
+		return ;
+	new->x = vec.x;
+	new->y = vec.y;
+	if (!*list)
+		*list = new;
+	else
+	{
+		new->next = *list;
+		*list = new;
+	}
 }

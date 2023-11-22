@@ -8,6 +8,10 @@
 		"keysym.h": "c",
 		"keysymdef.h": "c",
 		"*.ok": "c",
-		"mlx_int.h": "c"
+		"mlx_int.h": "c",
+		"stdlib.h": "c",
+		"stdio.h": "c",
+		"fcntl.h": "c",
+		"cstdlib": "c"
 	}
 }

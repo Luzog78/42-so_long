@@ -22,7 +22,8 @@
                 "./minilibx-linux",
                 "-lmlx_Linux",
                 "-lXext",
-                "-lX11"
+                "-lX11",
+                "-Wall", "-Wextra", "-Werror"
             ],
             "options": {
                 // "cwd": "${fileDirname}"

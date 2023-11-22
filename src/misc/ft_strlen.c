@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 07:07:27 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 19:37:16 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/22 13:28:14 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/22 13:28:23 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(void)
+size_t	ft_strlen(char *str)
 {
-	t_data	data;
+	size_t	len;
 
-	ft_data_init(&data);
-	ft_parse(&data, "map.ber");
-	ft_game_init(&data);
-	//mlx_loop(data.mlx);
+	if (!str)
+		return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }

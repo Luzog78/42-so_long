@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_str_contains.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 07:07:27 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 19:37:16 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/22 13:27:16 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/22 13:27:38 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-
-int	main(void)
+int	ft_str_contains(char *str, char c)
 {
-	t_data	data;
+	int	i;
 
-	ft_data_init(&data);
-	ft_parse(&data, "map.ber");
-	ft_game_init(&data);
-	//mlx_loop(data.mlx);
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }

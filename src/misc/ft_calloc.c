@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 07:07:27 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 19:37:16 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/22 13:41:27 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/22 13:42:36 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(void)
+void	*ft_calloc(size_t count, size_t size)
 {
-	t_data	data;
+	char	*ptr;
+	size_t	i;
 
-	ft_data_init(&data);
-	ft_parse(&data, "map.ber");
-	ft_game_init(&data);
-	//mlx_loop(data.mlx);
+	ptr = malloc(count * size);
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (i < count * size)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+	return (ptr);
 }
