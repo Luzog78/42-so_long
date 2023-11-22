@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"so_long.h": "c",
+		"bit": "c",
+		"functional": "c",
+		"random": "c",
+		"mlx.h": "c",
+		"keysym.h": "c",
+		"keysymdef.h": "c",
+		"*.ok": "c",
+		"mlx_int.h": "c"
+	}
+}
