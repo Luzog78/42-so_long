@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/23 11:11:53 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/23 21:49:06 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@
 # include <mlx.h>
 # include <X11/keysym.h>
 
-# define HEIGHT 480 // 920
-# define WIDTH 720 // 1080
+# define HEIGHT 920
+# define WIDTH 1080
+// # define HEIGHT 480
+// # define WIDTH 720
 # define NAME "So Long"
 
 typedef long long			t_ll;
 typedef unsigned long long	t_ull;
+typedef unsigned int		t_ui;
 
 typedef enum e_bool {
 	FALSE,
@@ -60,6 +63,7 @@ typedef struct s_frame {
 	char	*addr;
 	int		bits_per_pixel;
 	int		width;
+	int		height;
 	int		endian;
 }	t_frame;
 
@@ -74,6 +78,7 @@ typedef struct s_data {
 	void	*mlx;
 	void	*mlx_win;
 	t_frame	frame;
+	t_frame	img;
 
 	char	**map;
 	int		map_width;
@@ -91,6 +96,8 @@ typedef struct s_data {
 
 	t_ull	moves;
 	t_ull	frames;
+
+	int color;
 }	t_data;
 
 enum e_mlx_events {
@@ -136,8 +143,11 @@ enum e_mlx_masks {
 /* === ->>  Drawing functions  <<- === */
 /* *********************************** */
 
-void	ft_draw_pixel(t_frame *frame, t_vec2 point, int color);
-void	ft_draw_rect(t_frame *frame, t_vec2 start, t_vec2 size, int color);
+void	ft_draw_frame(t_frame *base, t_frame *drawing, t_vec2 point);
+void	ft_draw_pixel(t_frame *frame, t_vec2 point, t_ui color);
+void	ft_draw_raw_pixel(t_frame *frame, t_vec2 point, t_ui color);
+void	ft_draw_raw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color);
+void	ft_draw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color);
 
 /* ******************************** */
 /* === ->>  Game functions  <<- === */
@@ -171,11 +181,12 @@ int		ft_parse(t_data *data, char *map_path);
 /* === ->>  Miscellanous functions  <<- === */
 /* **************************************** */
 
-int		ft_argb(int a, int r, int g, int b);
+t_ui	ft_argb(int a, int r, int g, int b);
+t_ui	ft_blend(t_ui a, t_ui b);
 void	*ft_calloc(size_t count, size_t size);
-int		ft_color_progression(int i, int max);
+t_ui	ft_color_progression(int i, int max);
 void	ft_data_init(t_data *data);
-int		ft_grad_color(int i, int max, int color1, int color2);
+t_ui	ft_grad_color(int i, int max, t_ui color1, t_ui color2);
 void	ft_list_vec2_add_front(t_list_vec2 **list, t_vec2 vec);
 t_bool	ft_list_vec2_contains(t_list_vec2 *list, t_vec2 vec);
 int		ft_error(t_data *data, char *str);

@@ -6,11 +6,13 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 07:22:18 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 07:22:36 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/23 21:44:41 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_argb(int a, int r, int g, int b)
+#include "so_long.h"
+
+t_ui	ft_argb(int a, int r, int g, int b)
 {
 	return ((a << 24) + (r << 16) + (g << 8) + b);
 }

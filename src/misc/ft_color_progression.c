@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 07:25:15 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 08:28:11 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/23 21:46:43 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,35 @@
  * It takes an integer i and an integer max as parameters.
  * 
  * The pattern is as follows:
- * > color = 0xFFFFFF, i = 0
- * > color = 0x0000FF, i = max / 7
- * > color = 0x00FFFF, i = max * 2 / 7
- * > color = 0x00FF00, i = max * 3 / 7
- * > color = 0xFFFF00, i = max * 4 / 7
- * > color = 0xFF0000, i = max * 5 / 7
- * > color = 0xFF00FF, i = max * 6 / 7
- * > color = 0xFFFFFF, i = max
+ * > color = 0xFFFFFFFF, i = 0
+ * > color = 0xFF0000FF, i = max / 7
+ * > color = 0xFF00FFFF, i = max * 2 / 7
+ * > color = 0xFF00FF00, i = max * 3 / 7
+ * > color = 0xFFFFFF00, i = max * 4 / 7
+ * > color = 0xFFFF0000, i = max * 5 / 7
+ * > color = 0xFFFF00FF, i = max * 6 / 7
+ * > color = 0xFFFFFFFF, i = max
 */
-int	ft_color_progression(int i, int max)
+t_ui	ft_color_progression(int i, int max)
 {
 	if (i < max / 7)
-		return (ft_grad_color(i, max / 7, 0xFFFFFF, 0x0000FF));
+		return (ft_grad_color(i, max / 7, 0xFFFFFFFF, 0xFF0000FF));
 	else if (i < max * 2 / 7)
-		return (ft_grad_color(i - max / 7, max / 7, 0x0000FF, 0x00FFFF));
+		return (ft_grad_color(
+			i - max / 7, max / 7, 0xFF0000FF, 0xFF00FFFF));
 	else if (i < max * 3 / 7)
-		return (ft_grad_color(i - max * 2 / 7, max / 7, 0x00FFFF, 0x00FF00));
+		return (ft_grad_color(
+			i - max * 2 / 7, max / 7, 0xFF00FFFF, 0xFF00FF00));
 	else if (i < max * 4 / 7)
-		return (ft_grad_color(i - max * 3 / 7, max / 7, 0x00FF00, 0xFFFF00));
+		return (ft_grad_color(
+			i - max * 3 / 7, max / 7, 0xFF00FF00, 0xFFFFFF00));
 	else if (i < max * 5 / 7)
-		return (ft_grad_color(i - max * 4 / 7, max / 7, 0xFFFF00, 0xFF0000));
+		return (ft_grad_color(
+			i - max * 4 / 7, max / 7, 0xFFFFFF00, 0xFFFF0000));
 	else if (i < max * 6 / 7)
-		return (ft_grad_color(i - max * 5 / 7, max / 7, 0xFF0000, 0xFF00FF));
+		return (ft_grad_color(
+			i - max * 5 / 7, max / 7, 0xFFFF0000, 0xFFFF00FF));
 	else
-		return (ft_grad_color(i - max * 7 / 7, max / 7, 0xFF00FF, 0xFFFFFF));
+		return (ft_grad_color(
+			i - max * 6 / 7, max / 7, 0xFFFF00FF, 0xFFFFFFFF));
 }

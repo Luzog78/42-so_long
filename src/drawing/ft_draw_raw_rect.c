@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_draw_rect.c                                     :+:      :+:    :+:   */
+/*   ft_draw_raw_rect.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 07:08:47 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/23 21:47:54 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/23 21:48:16 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_draw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color)
+void	ft_draw_raw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color)
 {
 	int	x;
 	int	y;
@@ -29,7 +29,7 @@ void	ft_draw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color)
 		x = minx;
 		while (x < maxx)
 		{
-			ft_draw_pixel(frame, (t_vec2){x, y}, color);
+			ft_draw_raw_pixel(frame, (t_vec2){x, y}, color);
 			x++;
 		}
 		y++;
