@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 19:33:31 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/23 11:11:53 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ int		ft_grad_color(int i, int max, int color1, int color2);
 void	ft_list_vec2_add_front(t_list_vec2 **list, t_vec2 vec);
 t_bool	ft_list_vec2_contains(t_list_vec2 *list, t_vec2 vec);
 int		ft_error(t_data *data, char *str);
+void	ft_free_list_vec2(t_list_vec2 **list);
 void	ft_free_map(char **map);
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);

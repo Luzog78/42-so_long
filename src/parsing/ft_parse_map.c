@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 10:21:45 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 19:34:18 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/23 10:20:09 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_parse_map(t_data *data, int fd)
 		if (i >= data->map_height)
 		{
 			free(line);
-			return (ft_error(data, "Error: ... Stop trolling bro\n"));
+			return (ft_error(data, "Error: Line count error\n"));
 		}
 		if (ft_parse_line(data, line, i) == -1)
 		{

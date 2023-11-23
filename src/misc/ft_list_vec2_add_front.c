@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:44:10 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 18:52:46 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/23 11:03:06 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_list_vec2_add_front(t_list_vec2 **list, t_vec2 vec)
 		return ;
 	new->x = vec.x;
 	new->y = vec.y;
+	new->next = NULL;
 	if (!*list)
 		*list = new;
 	else
