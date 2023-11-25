@@ -10,6 +10,7 @@
                 // "${file}",
                 "main.c",
                 "src/**/*.c",
+                "src/*/*/*.c",
                 "-o",
                 // "${fileDirname}/${fileBasenameNoExtension}",
                 "main",
@@ -23,7 +24,7 @@
                 "-lmlx_Linux",
                 "-lXext",
                 "-lX11",
-                "-Wall", "-Wextra", "-Werror"
+                // "-Wall", "-Wextra", "-Werror"
             ],
             "options": {
                 // "cwd": "${fileDirname}"

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 10:21:45 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/23 10:20:09 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/25 01:43:53 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_parse_map(t_data *data, int fd)
 			free(line);
 			return (-1);
 		}
+		free(line);
 		i++;
 	}
 	return (0);

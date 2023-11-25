@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/23 21:49:06 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/24 11:01:33 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,20 @@
 # include <mlx.h>
 # include <X11/keysym.h>
 
-# define HEIGHT 920
-# define WIDTH 1080
-// # define HEIGHT 480
-// # define WIDTH 720
-# define NAME "So Long"
+# define NAME			"So Long"
+# define HEIGHT			920
+# define WIDTH			1080
+// # define HEIGHT			480
+// # define WIDTH			720
+
+# define TYPE_ENTRY		'P'
+# define TYPE_EXIT		'E'
+# define TYPE_WALL		'1'
+# define TYPE_EMPTY		'0'
+# define TYPE_ITEM		'C'
+# define TYPES			"PE10C"
+
+# define ASSETS_SIZE	64
 
 typedef long long			t_ll;
 typedef unsigned long long	t_ull;
@@ -35,13 +44,6 @@ typedef enum e_bool {
 	FALSE,
 	TRUE
 }	t_bool;
-
-# define TYPE_ENTRY 'P'
-# define TYPE_EXIT 'E'
-# define TYPE_WALL '1'
-# define TYPE_EMPTY '0'
-# define TYPE_ITEM 'C'
-# define TYPES "PE10C"
 
 typedef enum e_mob_type {
 	MOC_CREATURE
@@ -62,10 +64,19 @@ typedef struct s_frame {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
+	int		line_size;
 	int		width;
 	int		height;
 	int		endian;
 }	t_frame;
+
+typedef struct s_tile {
+	char	type;
+	int		asset_idx;
+	int		curr_anim;
+	int		tot_anim;
+	t_bool	has_changed;
+}	t_tile;
 
 typedef struct s_mobs {
 	t_mob_type		type;
@@ -77,10 +88,9 @@ typedef struct s_mobs {
 typedef struct s_data {
 	void	*mlx;
 	void	*mlx_win;
-	t_frame	frame;
-	t_frame	img;
+	t_frame	**assets;
 
-	char	**map;
+	t_tile	**map;
 	int		map_width;
 	int		map_height;
 
@@ -96,8 +106,6 @@ typedef struct s_data {
 
 	t_ull	moves;
 	t_ull	frames;
-
-	int color;
 }	t_data;
 
 enum e_mlx_events {
@@ -143,10 +151,11 @@ enum e_mlx_masks {
 /* === ->>  Drawing functions  <<- === */
 /* *********************************** */
 
+void	ft_draw_blend_pixel(t_frame *frame, t_vec2 point, t_ui color);
+void	ft_draw_blend_rect(t_frame *frame, t_vec2 start,
+			t_vec2 size, t_ui color);
 void	ft_draw_frame(t_frame *base, t_frame *drawing, t_vec2 point);
 void	ft_draw_pixel(t_frame *frame, t_vec2 point, t_ui color);
-void	ft_draw_raw_pixel(t_frame *frame, t_vec2 point, t_ui color);
-void	ft_draw_raw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color);
 void	ft_draw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color);
 
 /* ******************************** */

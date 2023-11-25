@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:23:26 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 19:33:55 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/25 01:45:42 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int	ft_parse_char(t_data *data, char c, int i, int j)
 		data->items++;
 	else if (!ft_str_contains(TYPES, c))
 		return (ft_error(data, "Error: Invalid character in map\n"));
+	data->map[i][j].type = c;
 	return (0);
 }

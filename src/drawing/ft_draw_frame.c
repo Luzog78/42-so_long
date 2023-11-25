@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:52:08 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/23 21:55:13 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/24 00:00:36 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_draw_frame(t_frame *base, t_frame *drawing, t_vec2 point)
 			{
 				dst = drawing->addr + (pos.y * drawing->width
 						+ pos.x * (drawing->bits_per_pixel / 8));
-				ft_draw_raw_pixel(base, (t_vec2){point.x + pos.x, point.y + pos.y},
+				ft_draw_pixel(base, (t_vec2){point.x + pos.x, point.y + pos.y},
 					*(t_ui *) dst);
 			}
 			pos.x++;

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 10:21:45 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/23 11:06:57 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/25 01:05:38 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_parse(t_data *data, char *map_path)
 
 	if (ft_parse_height(data, map_path) == -1)
 		return (-1);
-	data->map = ft_calloc(data->map_height + 1, sizeof(char *));
+	data->map = ft_calloc(data->map_height + 1, sizeof(t_tile *));
 	if (!data->map)
 		return (ft_error(data, "Error: Cannot allocate memory for the map\n"));
 	fd = open(map_path, O_RDONLY);

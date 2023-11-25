@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_game_loop.c                                     :+:      :+:    :+:   */
+/*   ft_draw_blend_rect.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 07:14:05 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/24 10:55:53 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/22 07:08:47 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/24 00:03:50 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-
-int	ft_game_loop(t_data *data)
+void	ft_draw_blend_rect(t_frame *frame, t_vec2 start,
+	t_vec2 size, t_ui color)
 {
-	t_vec2 point;
+	int	x;
+	int	y;
+	int	maxx;
+	int	maxy;
+	int	minx;
 
-	data->frames++;
-	printf("frames: %llu\n", data->frames);
-	return (0);
+	maxy = ft_max(start.y, start.y + size.y);
+	maxx = ft_max(start.x, start.x + size.x);
+	minx = ft_min(start.x, start.x + size.x);
+	y = ft_min(start.y, start.y + size.y);
+	while (y < maxy)
+	{
+		x = minx;
+		while (x < maxx)
+		{
+			ft_draw_blend_pixel(frame, (t_vec2){x, y}, color);
+			x++;
+		}
+		y++;
+	}
 }
