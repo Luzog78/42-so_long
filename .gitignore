@@ -8,3 +8,4 @@ img/*
 !img/*64.xpm
 !img/tile*.xpm
 !img/m_*.xpm
+*.sh

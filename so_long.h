@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 13:06:38 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:13:16 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,8 @@ void	ft_arrange_tile(t_data *data, t_vec2 point);
 int		ft_load_assets(t_data *data);
 int		ft_load_player(t_data *data);
 int		ft_load_simple_asset(t_data *data, int idx, char *paths);
-int		ft_load_simple_player_asset(t_data *data, int idx, char *path);
+int		ft_load_player_asset(t_data *data, int idx,
+			char *path0, char *path1, char *path2);
 
 /* *********************************** */
 /* === ->>  Drawing functions  <<- === */

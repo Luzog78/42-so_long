@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 07:14:05 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 15:13:24 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 21:27:45 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,17 @@ int	ft_game_loop(t_data *data)
 	if (data->frames % 300 == 0)
 	{
 		if (data->smoothing.vec.x != 0 || data->smoothing.vec.y != 0)
-			ft_smooth_player_move(data, 4);
+		{
+			ft_smooth_player_move(data, 1);
+			if (data->frames % 3000 == 0)
+				data->player_tile.curr_frame = (data->player_tile.curr_frame + 1)
+					% data->player_assets[data->player_direction].tot_frames;
+		}
 		mob = data->mobs;
 		while (mob)
 		{
 			if (mob->smoothing.vec.x != 0 || mob->smoothing.vec.y != 0)
-				ft_smooth_mob_move(data, mob, 4);
+				ft_smooth_mob_move(data, mob, 1);
 			mob = mob->next;
 		}
 	}
