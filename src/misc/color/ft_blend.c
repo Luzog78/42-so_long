@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:44:52 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/23 21:28:32 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 15:01:07 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_ui	ft_blend(t_ui a, t_ui b)
 	a_color = a & 0x00FFFFFF;
 	b_color = b & 0x00FFFFFF;
 	result = (a_color * a_aplha + (b_color * b_alpha) * (1.0 - a_aplha))
-			/ (a_aplha + b_alpha * (1.0 - a_aplha));
+		/ (a_aplha + b_alpha * (1.0 - a_aplha));
 	result |= ((a >> 24) + (b >> 24) * (255 - (a >> 24))) << 24;
 	return (result);
 }

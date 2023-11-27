@@ -6,26 +6,25 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 07:14:05 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 13:23:11 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 15:13:24 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-
 int	ft_game_loop(t_data *data)
 {
 	t_mob	*mob;
 
-	if (data->frames % 80 == 0)
+	if (data->frames % 300 == 0)
 	{
 		if (data->smoothing.vec.x != 0 || data->smoothing.vec.y != 0)
-			ft_smooth_player_move(data, 1);
+			ft_smooth_player_move(data, 4);
 		mob = data->mobs;
 		while (mob)
 		{
 			if (mob->smoothing.vec.x != 0 || mob->smoothing.vec.y != 0)
-				ft_smooth_mob_move(data, mob, 1);
+				ft_smooth_mob_move(data, mob, 4);
 			mob = mob->next;
 		}
 	}

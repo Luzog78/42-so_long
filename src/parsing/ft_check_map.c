@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:37:50 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 03:17:08 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 15:03:37 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int	ft_check_map(t_data *data)
 		pos.x = 0;
 		while (pos.x < data->map_width)
 		{
-			if ((pos.x == 0 || pos.y == 0
-					|| pos.x == data->map_width - 1
+			if ((pos.x == 0 || pos.y == 0 || pos.x == data->map_width - 1
 					|| pos.y == data->map_height - 1)
 				&& data->map[pos.y][pos.x].type != TYPE_WALL)
 				return (ft_error(data, "Error: Map is not closed\n"));

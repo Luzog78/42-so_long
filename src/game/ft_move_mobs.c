@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 06:49:27 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 13:03:31 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 14:55:12 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	ft_move_mobs(t_data *data)
 
 static t_direction	*ft_get_dir(t_mob *mob)
 {
-	t_direction dir;
-	t_direction *dirs;
-	int i;
-	
+	t_direction	dir;
+	t_direction	*dirs;
+	int			i;
+
 	dirs = ft_calloc(4, sizeof(t_direction));
 	if (dirs == NULL)
 		return (NULL);

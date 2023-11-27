@@ -6,11 +6,13 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 01:58:03 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 08:55:28 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 15:07:39 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	ft_end_smoothing(t_data *data, t_vec2 new_pos, t_tile tile);
 
 void	ft_move_player(t_data *data, t_direction direction)
 {
@@ -37,6 +39,11 @@ void	ft_move_player(t_data *data, t_direction direction)
 	tile = data->map[new_pos.y][new_pos.x];
 	if (tile.type == TYPE_WALL)
 		return ;
+	ft_end_smoothing(data, new_pos, tile);
+}
+
+static void	ft_end_smoothing(t_data *data, t_vec2 new_pos, t_tile tile)
+{
 	if (tile.type == TYPE_ITEM)
 	{
 		ft_grab_item(data, tile.item_idx);

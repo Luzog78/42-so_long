@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 06:53:34 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/24 09:43:37 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 14:56:54 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_draw_pixel(t_frame *frame, t_vec2 point, t_ui color)
 {
 	char	*dst;
-	
+
 	dst = frame->addr + (point.y * frame->line_size
 			+ point.x * (frame->bits_per_pixel / 8));
 	*(t_ui *) dst = color;
