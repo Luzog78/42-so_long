@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 08:45:23 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 03:26:12 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 06:24:48 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_data_init(t_data *data)
 	data->player_assets = NULL;
 	data->player_tile.curr_frame = 0;
 	data->player_tile.has_changed = TRUE;
-	data->can_move = FALSE;
 	data->items = NULL;
 	data->items_collected = 0;
 	data->items_count = 0;

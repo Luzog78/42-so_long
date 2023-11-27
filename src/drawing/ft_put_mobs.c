@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_game_quit.c                                     :+:      :+:    :+:   */
+/*   ft_put_mobs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 07:16:15 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 07:39:21 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/27 06:37:31 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/27 06:38:37 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_game_quit(t_data *data)
+void	ft_put_mobs(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->mlx_win);
-	ft_free_assets(data);
-	ft_free_player(data);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
-	ft_free_map(data->map);
-	ft_free_items(data->items);
-	ft_free_mobs(data->mobs);
-	exit(0);
-	return (0);
+	t_mob	*mob;
+
+	mob = data->mobs;
+	while (mob)
+	{
+		ft_put_mob(data, mob);
+		mob = mob->next;
+	}
 }

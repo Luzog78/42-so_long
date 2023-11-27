@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 05:32:26 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 07:39:03 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@
 # define TYPE_WALL		'1'
 # define TYPE_EMPTY		'0'
 # define TYPE_ITEM		'C'
-# define TYPES			"PE10C"
+# define TYPE_ZOMBIE	'Z'
+# define TYPES			"PE10CZ"
 
 # define TILE_SIZE			64
 # define PLAYER_SIZE		32
-# define ASSETS_COUNT		4
+# define MOB_SIZE			32
+# define ASSETS_COUNT		1024
 
 typedef long long			t_ll;
 typedef unsigned long long	t_ull;
@@ -48,7 +50,8 @@ typedef enum e_bool {
 }	t_bool;
 
 typedef enum e_mob_type {
-	MOC_CREATURE
+	MOB_PLAYER,
+	MOB_ZOMBIE
 }	t_mob_type;
 
 typedef enum e_direction {
@@ -92,12 +95,14 @@ typedef struct s_tile {
 	int		item_idx;
 }	t_tile;
 
-typedef struct s_mobs {
+typedef struct s_mob {
 	t_mob_type		type;
 	t_vec2			pos;
+	t_direction		dir;
+	t_tile			tile;
 	int				health;
-	struct s_mobs	*next;
-}	t_mobs;
+	struct s_mob	*next;
+}	t_mob;
 
 typedef struct s_data {
 	void		*mlx;
@@ -110,14 +115,13 @@ typedef struct s_data {
 
 	t_vec2		player;
 	t_direction	player_direction;
-	t_bool		can_move;
 	t_asset		*player_assets;
 	t_tile		player_tile;
 
 	t_tile		*items;
 	int			items_collected;
 	int			items_count;
-	t_mobs		*mobs;
+	t_mob		*mobs;
 
 	t_vec2		entry;
 	t_vec2		exit;
@@ -198,6 +202,8 @@ void	ft_put_tile(t_data *data, t_vec2 point);
 void	ft_put_tiles(t_data *data);
 void	ft_put_item(t_data *data, t_vec2 point, int item_tile_idx);
 void	ft_put_score(t_data *data);
+void	ft_put_mob(t_data *data, t_mob *mob);
+void	ft_put_mobs(t_data *data);
 
 /* ******************************** */
 /* === ->>  Game functions  <<- === */
@@ -209,6 +215,8 @@ int		ft_game_loop(t_data *data);
 int		ft_game_quit(t_data *data);
 void	ft_move_player(t_data *data, t_direction direction);
 void	ft_grab_item(t_data *data, int item_idx);
+t_bool	ft_move_mob(t_data *data, t_mob *mob);
+void	ft_move_mobs(t_data *data);
 
 /* ******************************* */
 /* === ->>  get_next_line  <<- === */
@@ -253,5 +261,8 @@ size_t	ft_strlen(char const *str);
 void	ft_free_items(t_tile *items);
 char	*ft_itoa(int integer);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	ft_mobs_add_front(t_mob **mobs, t_mob *new);
+t_mob	*ft_mobs_create(t_data *data, t_vec2 pos, t_mob_type type, int asset);
+void	ft_free_mobs(t_mob *mobs);
 
 #endif

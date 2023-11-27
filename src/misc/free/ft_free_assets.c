@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 06:14:17 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/25 12:43:20 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 07:41:19 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,19 @@ void	ft_free_assets(t_data *data)
 	i = 0;
 	if (!data->assets)
 		return ;
-	while (i < ASSETS_COUNT && data->assets[i].frames)
+	while (i < ASSETS_COUNT)
 	{
-		j = 0;
-		while (j < data->assets[i].tot_frames
-			&& data->assets[i].frames[j].img)
+		if (data->assets[i].frames)
 		{
-			mlx_destroy_image(data->mlx, data->assets[i].frames[j].img);
-			j++;
+			j = 0;
+			while (j < data->assets[i].tot_frames
+				&& data->assets[i].frames[j].img)
+			{
+				mlx_destroy_image(data->mlx, data->assets[i].frames[j].img);
+				j++;
+			}
+			free(data->assets[i].frames);
 		}
-		free(data->assets[i].frames);
 		i++;
 	}
 	free(data->assets);

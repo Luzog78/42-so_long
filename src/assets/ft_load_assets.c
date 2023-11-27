@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 03:03:08 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/25 12:01:54 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 06:46:29 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	ft_load_assets(t_data *data)
 		|| ft_load_simple_asset(data, 1, "img/grass64.xpm") == -1
 		|| ft_load_simple_asset(data, 2, "img/diamond64.xpm") == -1
 		|| ft_load_simple_asset(data, 3, "img/craft64.xpm") == -1
+		|| ft_load_simple_asset(data, 5, "img/m_z32.xpm") == -1
+		|| ft_load_simple_asset(data, 6, "img/m_z32.xpm") == -1
+		|| ft_load_simple_asset(data, 7, "img/m_z32.xpm") == -1
+		|| ft_load_simple_asset(data, 8, "img/m_z32.xpm") == -1
 	)
 		return (-1);
 	return (0);
