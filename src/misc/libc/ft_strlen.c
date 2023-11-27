@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_game_loop.c                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 07:14:05 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 04:21:13 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/22 13:28:14 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/27 04:20:21 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-
-int	ft_game_loop(t_data *data)
+size_t	ft_strlen(char const *str)
 {
-	t_vec2 point;
+	size_t	len;
 
-	ft_put_tiles(data);
-	ft_put_player(data);
-	ft_put_score(data);
-	data->frames++;
-	printf("frames: %llu\n", data->frames);
-	return (0);
+	if (!str)
+		return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }

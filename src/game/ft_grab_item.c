@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_grab_item.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 13:28:14 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 13:28:23 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/27 04:03:19 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/27 05:20:18 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-size_t	ft_strlen(char *str)
+void	ft_grab_item(t_data *data, int item_idx)
 {
-	size_t	len;
+	t_tile	tile;
 
-	if (!str)
-		return (0);
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+	tile = data->items[item_idx];
+	if (tile.type)
+		return ;
+	data->items[item_idx].type = 1;
+	data->items_collected++;
+	if (data->items_collected == data->items_count)
+		data->can_exit = TRUE;
 }

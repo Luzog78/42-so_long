@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 03:55:21 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 04:20:30 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ void	ft_draw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color);
 void	ft_put_tile(t_data *data, t_vec2 point);
 void	ft_put_tiles(t_data *data);
 void	ft_put_item(t_data *data, t_vec2 point, int item_tile_idx);
+void	ft_put_score(t_data *data);
 
 /* ******************************** */
 /* === ->>  Game functions  <<- === */
@@ -207,6 +208,7 @@ int		ft_game_keydown(int keycode, t_data *data);
 int		ft_game_loop(t_data *data);
 int		ft_game_quit(t_data *data);
 void	ft_move_player(t_data *data, t_direction direction);
+void	ft_grab_item(t_data *data, int item_idx);
 
 /* ******************************* */
 /* === ->>  get_next_line  <<- === */
@@ -247,7 +249,9 @@ void	ft_free_player(t_data *data);
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);
 int		ft_str_contains(char *str, char c);
-size_t	ft_strlen(char *str);
+size_t	ft_strlen(char const *str);
 void	ft_free_items(t_tile *items);
+char	*ft_itoa(int integer);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 01:58:03 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 03:47:33 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 05:21:42 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ void	ft_move_player(t_data *data, t_direction direction)
 	tile = data->map[new_pos.y][new_pos.x];
 	if (tile.type == TYPE_WALL)
 		return ;
+	if (tile.type == TYPE_ITEM)
+	{
+		ft_grab_item(data, tile.item_idx);
+		data->map[new_pos.y][new_pos.x].has_changed = TRUE;
+	}
+	if (tile.type == TYPE_EXIT && data->can_exit)
+		ft_game_quit(data);
 	data->player = new_pos;
 	data->moves++;
 }
