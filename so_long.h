@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/24 11:01:33 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 03:55:21 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@
 # define TYPE_ITEM		'C'
 # define TYPES			"PE10C"
 
-# define ASSETS_SIZE	64
+# define TILE_SIZE			64
+# define PLAYER_SIZE		32
+# define ASSETS_COUNT		4
 
 typedef long long			t_ll;
 typedef unsigned long long	t_ull;
@@ -48,6 +50,13 @@ typedef enum e_bool {
 typedef enum e_mob_type {
 	MOC_CREATURE
 }	t_mob_type;
+
+typedef enum e_direction {
+	DIR_UP = 3,
+	DIR_DOWN = 0,
+	DIR_LEFT = 1,
+	DIR_RIGHT = 2
+}	t_direction;
 
 typedef struct s_vec2 {
 	int	x;
@@ -70,12 +79,17 @@ typedef struct s_frame {
 	int		endian;
 }	t_frame;
 
+typedef struct s_asset {
+	t_frame	*frames;
+	int		tot_frames;
+}	t_asset;
+
 typedef struct s_tile {
 	char	type;
 	int		asset_idx;
-	int		curr_anim;
-	int		tot_anim;
+	int		curr_frame;
 	t_bool	has_changed;
+	int		item_idx;
 }	t_tile;
 
 typedef struct s_mobs {
@@ -86,26 +100,31 @@ typedef struct s_mobs {
 }	t_mobs;
 
 typedef struct s_data {
-	void	*mlx;
-	void	*mlx_win;
-	t_frame	**assets;
+	void		*mlx;
+	void		*mlx_win;
+	t_asset		*assets;
 
-	t_tile	**map;
-	int		map_width;
-	int		map_height;
+	t_tile		**map;
+	int			map_width;
+	int			map_height;
 
-	t_vec2	player;
-	t_bool	can_move;
+	t_vec2		player;
+	t_direction	player_direction;
+	t_bool		can_move;
+	t_asset		*player_assets;
+	t_tile		player_tile;
 
-	int		items;
-	t_mobs	*mobs;
+	t_tile		*items;
+	int			items_collected;
+	int			items_count;
+	t_mobs		*mobs;
 
-	t_vec2	entry;
-	t_vec2	exit;
-	t_bool	can_exit;
+	t_vec2		entry;
+	t_vec2		exit;
+	t_bool		can_exit;
 
-	t_ull	moves;
-	t_ull	frames;
+	t_ull		moves;
+	t_ull		frames;
 }	t_data;
 
 enum e_mlx_events {
@@ -147,25 +166,47 @@ enum e_mlx_masks {
 	MASK_OWNER_GRAB_BUTTON = 1L<<24
 };
 
+/* ******************************************* */
+/* === ->>  Map arrangement functions  <<- === */
+/* ******************************************* */
+
+void	ft_arrange_map(t_data *data);
+void	ft_arrange_tile(t_data *data, t_vec2 point);
+
+/* ****************************************** */
+/* === ->>  Assets loading functions  <<- === */
+/* ****************************************** */
+
+int		ft_load_assets(t_data *data);
+int		ft_load_player(t_data *data);
+int		ft_load_simple_asset(t_data *data, int idx, char *paths);
+int		ft_load_simple_player_asset(t_data *data, int idx, char *path);
+
 /* *********************************** */
 /* === ->>  Drawing functions  <<- === */
 /* *********************************** */
 
-void	ft_draw_blend_pixel(t_frame *frame, t_vec2 point, t_ui color);
-void	ft_draw_blend_rect(t_frame *frame, t_vec2 start,
-			t_vec2 size, t_ui color);
+void	ft_put_blend_frame(t_data *data, t_frame *drawing,
+			t_vec2 point_win, t_vec2 point_offset);
+void	ft_put_blend_pixel(t_data *data, t_vec2 point_win,
+			t_vec2 point_offset, t_ui color);
 void	ft_draw_frame(t_frame *base, t_frame *drawing, t_vec2 point);
 void	ft_draw_pixel(t_frame *frame, t_vec2 point, t_ui color);
+void	ft_put_player(t_data *data);
 void	ft_draw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color);
+void	ft_put_tile(t_data *data, t_vec2 point);
+void	ft_put_tiles(t_data *data);
+void	ft_put_item(t_data *data, t_vec2 point, int item_tile_idx);
 
 /* ******************************** */
 /* === ->>  Game functions  <<- === */
 /* ******************************** */
 
-void	ft_game_init(t_data *data);
+int		ft_game_init(t_data *data);
 int		ft_game_keydown(int keycode, t_data *data);
 int		ft_game_loop(t_data *data);
 int		ft_game_quit(t_data *data);
+void	ft_move_player(t_data *data, t_direction direction);
 
 /* ******************************* */
 /* === ->>  get_next_line  <<- === */
@@ -199,11 +240,14 @@ t_ui	ft_grad_color(int i, int max, t_ui color1, t_ui color2);
 void	ft_list_vec2_add_front(t_list_vec2 **list, t_vec2 vec);
 t_bool	ft_list_vec2_contains(t_list_vec2 *list, t_vec2 vec);
 int		ft_error(t_data *data, char *str);
+void	ft_free_assets(t_data *data);
 void	ft_free_list_vec2(t_list_vec2 **list);
-void	ft_free_map(char **map);
+void	ft_free_map(t_tile **map);
+void	ft_free_player(t_data *data);
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);
 int		ft_str_contains(char *str, char c);
 size_t	ft_strlen(char *str);
+void	ft_free_items(t_tile *items);
 
 #endif

@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_free_assets.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 07:07:27 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 03:30:48 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/25 06:14:17 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/25 12:43:20 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(void)
+void	ft_free_assets(t_data *data)
 {
-	t_data	data;
+	int	i;
+	int	j;
 
-	ft_data_init(&data);
-	if (ft_parse(&data, "map.ber") == -1
-		|| ft_game_init(&data) == -1)
-		return (-1);
-	if (ft_load_assets(&data) == -1
-		|| ft_load_player(&data) == -1)
+	i = 0;
+	if (!data->assets)
+		return ;
+	while (i < ASSETS_COUNT && data->assets[i].frames)
 	{
-		ft_game_quit(&data);
-		return (-1);
+		j = 0;
+		while (j < data->assets[i].tot_frames
+			&& data->assets[i].frames[j].img)
+		{
+			mlx_destroy_image(data->mlx, data->assets[i].frames[j].img);
+			j++;
+		}
+		free(data->assets[i].frames);
+		i++;
 	}
-	ft_arrange_map(&data);
-	for (int i = 0; i < data.map_height; i++)
-	{
-		for (int j = 0; j < data.map_width; j++)
-			printf("%c", data.map[i][j].type);
-		printf("\n");
-	}
-	mlx_loop(data.mlx);
+	free(data->assets);
 }

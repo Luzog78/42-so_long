@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_map.c                                      :+:      :+:    :+:   */
+/*   ft_put_tile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 13:39:49 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/25 02:42:03 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/25 06:20:23 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/27 03:52:56 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_free_map(t_tile **map)
+void	ft_put_tile(t_data *data, t_vec2 point)
 {
-	int	i;
+	t_tile	tile;
+	t_frame	frame;
 
-	i = 0;
-	if (!map)
+	tile = data->map[point.y][point.x];
+	if (!tile.has_changed)
 		return ;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
+	frame = data->assets[tile.asset_idx].frames[tile.curr_frame];
+	mlx_put_image_to_window(data->mlx, data->mlx_win, frame.img,
+		point.x * TILE_SIZE, point.y * TILE_SIZE);
+	data->map[point.y][point.x].has_changed = FALSE;
+	if (tile.type == TYPE_ITEM)
+		ft_put_item(data, point, tile.item_idx);
 }

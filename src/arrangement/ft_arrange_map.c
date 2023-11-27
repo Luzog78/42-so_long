@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_arrange_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 07:07:27 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 03:30:48 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/25 06:29:28 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/27 03:38:25 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(void)
+void	ft_arrange_map(t_data *data)
 {
-	t_data	data;
+	t_vec2	point;
 
-	ft_data_init(&data);
-	if (ft_parse(&data, "map.ber") == -1
-		|| ft_game_init(&data) == -1)
-		return (-1);
-	if (ft_load_assets(&data) == -1
-		|| ft_load_player(&data) == -1)
+	point.y = 0;
+	while (point.y < data->map_height)
 	{
-		ft_game_quit(&data);
-		return (-1);
+		point.x = 0;
+		while (point.x < data->map_width)
+		{
+			ft_arrange_tile(data, point);
+			point.x++;
+		}
+		point.y++;
 	}
-	ft_arrange_map(&data);
-	for (int i = 0; i < data.map_height; i++)
-	{
-		for (int j = 0; j < data.map_width; j++)
-			printf("%c", data.map[i][j].type);
-		printf("\n");
-	}
-	mlx_loop(data.mlx);
+	data->items_collected = 0;
 }

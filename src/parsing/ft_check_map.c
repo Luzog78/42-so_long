@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:37:50 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 19:35:02 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 03:17:08 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_map(t_data *data)
 		return (ft_error(data, "Error: No entry point\n"));
 	if (data->exit.x == -1)
 		return (ft_error(data, "Error: No exit point\n"));
-	if (data->items == 0)
+	if (data->items_count == 0)
 		return (ft_error(data, "Error: No collectibles\n"));
 	pos = (t_vec2){0, 0};
 	while (pos.y < data->map_height)
@@ -33,7 +33,7 @@ int	ft_check_map(t_data *data)
 			if ((pos.x == 0 || pos.y == 0
 					|| pos.x == data->map_width - 1
 					|| pos.y == data->map_height - 1)
-				&& data->map[pos.y][pos.x] != TYPE_WALL)
+				&& data->map[pos.y][pos.x].type != TYPE_WALL)
 				return (ft_error(data, "Error: Map is not closed\n"));
 			pos.x++;
 		}

@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_free_items.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 13:21:02 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/25 13:18:45 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/22 13:39:49 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/27 03:55:05 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_error(t_data *data, char *str)
+void	ft_free_items(t_tile *items)
 {
-	write(1, str, ft_strlen(str));
-	return (-1);
+	if (items)
+		free(items);
 }

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:49:49 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/23 11:13:07 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/25 02:32:32 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_check_path(t_data *data)
 		while (pos.x < data->map_width)
 		{
 			list = NULL;
-			if (data->map[pos.y][pos.x] == TYPE_ITEM
+			if (data->map[pos.y][pos.x].type == TYPE_ITEM
 				&& !ft_check_dfs(data, data->entry, pos, &list))
 				return (ft_clean(data, &list, "Error: Item unreachable\n"));
 			ft_free_list_vec2(&list);

@@ -2,4 +2,8 @@ minilibx-linux
 main
 assets/png
 assets/xpm
+assets/resized
 ru.xpm
+img/*
+!img/*64.xpm
+!img/tile*.xpm

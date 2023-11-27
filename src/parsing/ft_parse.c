@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 10:21:45 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/25 01:05:38 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/25 02:22:12 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_parse(t_data *data, char *map_path)
 {
-	int			fd;
+	int	fd;
 
 	if (ft_parse_height(data, map_path) == -1)
 		return (-1);

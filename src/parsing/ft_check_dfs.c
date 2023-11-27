@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:32:37 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/22 19:07:56 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/25 02:32:54 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_bool	ft_check_dfs(t_data *data, t_vec2 curr, t_vec2 to, t_list_vec2 **list)
 	if (curr.x < 0 || curr.y < 0
 		|| curr.x >= data->map_width
 		|| curr.y >= data->map_height
-		|| data->map[curr.y][curr.x] == TYPE_WALL
+		|| data->map[curr.y][curr.x].type == TYPE_WALL
 		|| ft_list_vec2_contains(*list, curr))
 		return (FALSE);
 	ft_list_vec2_add_front(list, curr);
