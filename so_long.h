@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 07:39:03 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 13:06:38 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,20 @@ typedef struct s_tile {
 	int		item_idx;
 }	t_tile;
 
+typedef struct s_smooth {
+	t_vec2		vec;
+	t_vec2		end;
+	t_tile		*tile1;
+	t_tile		*tile2;
+}	t_smooth;
+
 typedef struct s_mob {
 	t_mob_type		type;
 	t_vec2			pos;
 	t_direction		dir;
 	t_tile			tile;
 	int				health;
+	t_smooth		smoothing;
 	struct s_mob	*next;
 }	t_mob;
 
@@ -117,6 +125,8 @@ typedef struct s_data {
 	t_direction	player_direction;
 	t_asset		*player_assets;
 	t_tile		player_tile;
+	t_smooth	smoothing;
+	t_bool		can_move;
 
 	t_tile		*items;
 	int			items_collected;
@@ -217,6 +227,10 @@ void	ft_move_player(t_data *data, t_direction direction);
 void	ft_grab_item(t_data *data, int item_idx);
 t_bool	ft_move_mob(t_data *data, t_mob *mob);
 void	ft_move_mobs(t_data *data);
+void	ft_post_player_move(t_data *data);
+void	ft_smooth_player_move(t_data *data, int amount);
+void	ft_smooth_mob_move(t_data *data, t_mob *mob, int amount);
+void	ft_post_mob_move(t_data *data, t_mob *mob);
 
 /* ******************************* */
 /* === ->>  get_next_line  <<- === */

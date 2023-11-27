@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 01:58:03 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 07:31:02 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 08:55:28 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_move_player(t_data *data, t_direction direction)
 	t_vec2	new_pos;
 	t_tile	tile;
 
+	if (!data->can_move)
+		return ;
 	data->player_direction = direction;
 	data->player_tile.has_changed = TRUE;
 	new_pos = data->player;
@@ -42,14 +44,11 @@ void	ft_move_player(t_data *data, t_direction direction)
 	}
 	if (tile.type == TYPE_EXIT && data->can_exit)
 		ft_game_quit(data);
-	data->player = new_pos;
 	data->moves++;
-	t_mob *mob = data->mobs;
-	while (mob)
-	{
-		if (mob->pos.x == data->player.x
-			&& mob->pos.y == data->player.y)
-			ft_game_quit(data); // GAME OVER
-		mob = mob->next;
-	}
+	data->can_move = FALSE;
+	data->smoothing.end = new_pos;
+	data->smoothing.vec = (t_vec2){(new_pos.x - data->player.x) * TILE_SIZE,
+		(new_pos.y - data->player.y) * TILE_SIZE};
+	data->smoothing.tile1 = &data->map[data->player.y][data->player.x];
+	data->smoothing.tile2 = &data->map[new_pos.y][new_pos.x];
 }

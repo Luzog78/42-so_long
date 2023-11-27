@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 06:38:53 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 06:42:57 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 13:39:11 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_put_mob(t_data *data, t_mob *mob)
 	t_frame	frame;
 	t_vec2	point;
 	t_tile	base;
+	t_vec2	ptn_win;
 
 	tile = mob->tile;
 	if (!tile.has_changed)
@@ -25,8 +26,19 @@ void	ft_put_mob(t_data *data, t_mob *mob)
 	frame = data->assets[tile.asset_idx + mob->dir].frames[tile.curr_frame];
 	point = mob->pos;
 	base = data->map[point.y][point.x];
-	ft_put_blend_frame(data, &frame,
-		(t_vec2){point.x * TILE_SIZE, point.y * TILE_SIZE},
+	ptn_win = (t_vec2){point.x * TILE_SIZE, point.y * TILE_SIZE};
+	if (mob->smoothing.vec.x != 0 || mob->smoothing.vec.y != 0)
+	{
+		if (mob->smoothing.vec.x < 0)
+			ptn_win.x -= TILE_SIZE + mob->smoothing.vec.x;
+		else if (mob->smoothing.vec.x > 0)
+			ptn_win.x += TILE_SIZE - mob->smoothing.vec.x;
+		if (mob->smoothing.vec.y < 0)
+			ptn_win.y -= TILE_SIZE + mob->smoothing.vec.y;
+		else if (mob->smoothing.vec.y > 0)
+			ptn_win.y += TILE_SIZE - mob->smoothing.vec.y;
+	}
+	ft_put_blend_frame(data, &frame, ptn_win,
 		(t_vec2){(TILE_SIZE - MOB_SIZE) / 2, (TILE_SIZE - MOB_SIZE) / 2});
 	mob->tile.has_changed = FALSE;
 }

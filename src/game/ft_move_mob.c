@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 06:49:40 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 07:09:55 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 12:56:34 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ t_bool	ft_move_mob(t_data *data, t_mob *mob)
 		return (FALSE);
 	if (tile.type == TYPE_ITEM)
 		data->map[new_pos.y][new_pos.x].has_changed = TRUE;
-	mob->pos = new_pos;
+	mob->smoothing.end = new_pos;
+	mob->smoothing.vec = (t_vec2){(new_pos.x - mob->pos.x) * TILE_SIZE,
+		(new_pos.y - mob->pos.y) * TILE_SIZE};
+	mob->smoothing.tile1 = &data->map[mob->pos.y][mob->pos.x];
+	mob->smoothing.tile2 = &data->map[new_pos.y][new_pos.x];
 	return (TRUE);
 }

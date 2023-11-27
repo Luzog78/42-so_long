@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 06:49:27 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 07:29:23 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 13:03:31 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ void	ft_move_mobs(t_data *data)
 			i++;
 		}
 		free(dirs);
-		if (mob->pos.x == data->player.x
-			&& mob->pos.y == data->player.y)
-			ft_game_quit(data); // GAME OVER
 		mob = mob->next;
 	}
 }
