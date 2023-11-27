@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 08:53:21 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 03:30:16 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/27 05:45:56 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_game_init(t_data *data)
 	data->mlx_win = mlx_new_window(data->mlx, data->map_width * TILE_SIZE,
 		data->map_height * TILE_SIZE, NAME);
 
-	data->player = (t_vec2){1, 1};
+	data->player = data->entry;
 	data->player_tile.has_changed = TRUE;
 
 	mlx_loop_hook(data->mlx, &ft_game_loop, data);
