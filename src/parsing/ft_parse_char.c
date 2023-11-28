@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:23:26 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 06:28:51 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/28 10:51:35 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_parse_char(t_data *data, char c, int i, int j)
 	}
 	else if (c == TYPE_ZOMBIE)
 		ft_mobs_add_front(&data->mobs, ft_mobs_create(data,
-				(t_vec2){j, i}, MOB_ZOMBIE, 5));
+				(t_vec2){j, i}, MOB_ZOMBIE, 8));
 	else if (c == TYPE_ITEM)
 		data->items_count++;
 	else if (!ft_str_contains(TYPES, c))

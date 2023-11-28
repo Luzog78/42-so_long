@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 07:14:05 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 21:27:45 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/28 10:56:52 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 int	ft_game_loop(t_data *data)
 {
 	t_mob	*mob;
+	t_vec2	pos;
+	t_tile	*tile;
 
-	if (data->frames % 300 == 0)
+	if (data->frames % 100 == 0)
 	{
 		if (data->smoothing.vec.x != 0 || data->smoothing.vec.y != 0)
 		{
 			ft_smooth_player_move(data, 1);
-			if (data->frames % 3000 == 0)
+			if (data->frames % 300 == 0)
 				data->player_tile.curr_frame = (data->player_tile.curr_frame + 1)
 					% data->player_assets[data->player_direction].tot_frames;
 		}
@@ -33,7 +35,38 @@ int	ft_game_loop(t_data *data)
 			mob = mob->next;
 		}
 	}
-	if (data->frames % 30000 == 0 && data->frames != 0)
+	if (data->frames % 5000 == 0 && data->frames != 0)
+	{
+		pos = (t_vec2){0, 0};
+		while (pos.y < data->map_height)
+		{
+			pos.x = 0;
+			while (pos.x < data->map_width)
+			{
+				tile = &data->map[pos.y][pos.x];
+				if (data->assets[tile->asset_idx].tot_frames > 1)
+				{
+					tile->curr_frame = (tile->curr_frame + 1)
+						% data->assets[tile->asset_idx].tot_frames;
+					tile->has_changed = TRUE;
+				}
+				if (tile->item_idx != -1 && !data->items[tile->item_idx].type)
+				{
+					tile->has_changed = TRUE;
+					tile = &data->items[tile->item_idx];
+					if (data->assets[tile->asset_idx].tot_frames > 1)
+					{
+						tile->curr_frame = (tile->curr_frame + 1)
+							% data->assets[tile->asset_idx].tot_frames;
+						tile->has_changed = TRUE;
+					}
+				}
+				pos.x++;
+			}
+			pos.y++;
+		}
+	}
+	if (data->frames % 25000 == 0 && data->frames != 0)
 		ft_move_mobs(data);
 	ft_put_tiles(data);
 	ft_put_mobs(data);

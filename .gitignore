@@ -5,7 +5,12 @@ assets/xpm
 assets/resized
 ru.xpm
 img/*
-!img/*64.xpm
 !img/tile*.xpm
-!img/m_*.xpm
+!img/diams*-*.xpm
+!img/grass*-*.xpm
+!img/portal*-*.xpm
+!img/spawn*-*.xpm
+!img/water*-*.xpm
+!img/bricks*-*.xpm
+!img/zombie*-*.xpm
 *.sh

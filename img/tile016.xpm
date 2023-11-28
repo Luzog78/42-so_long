@@ -17,7 +17,7 @@ static char *fe6eca4bd53d4258ab12e9beba1801f1lykXa8tcCs0QvO8R[] = {
 "= c #FFFCE0A8",
 "- c gray8",
 "; c #FFF83800",
-": c white",
+": c #FFFFFFFF",
 /* pixels */
 "      ....XX&&&&&&&&ooOO..      ",
 "      ....XX&&&&&&&&ooOO..      ",

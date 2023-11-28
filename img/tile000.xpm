@@ -14,7 +14,7 @@ static char *_ff57f77fef84c799706611072a4f39b9fg6wTX7FEECg6bg[] = {
 "% c #FF3F3F74",
 "& c #FFFCE0A8",
 "* c #FFF83800",
-"= c white",
+"= c #FFFFFFFF",
 /* pixels */
 "            ..........          ",
 "            ..........          ",

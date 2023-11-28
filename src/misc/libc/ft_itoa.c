@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 13:44:01 by luzog             #+#    #+#             */
-/*   Updated: 2023/11/27 04:16:33 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/28 06:48:52 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	fill(char *str, int idx, int integer);
 static int	int_len(int i);
 
-char	*ft_itoa(int integer)
+char	*ft_itoa(int integer, int min_len)
 {
 	int		i;
 	int		len;
 	char	*alpha;
 
-	len = int_len(integer);
+	len = ft_max(int_len(integer), min_len);
 	alpha = ft_calloc(len + 1, sizeof(char));
 	if (alpha == NULL)
 		return (NULL);
@@ -35,10 +35,7 @@ char	*ft_itoa(int integer)
 		}
 		return (alpha);
 	}
-	if (integer == 0)
-		alpha[0] = '0';
-	else
-		fill(alpha, len - 1, integer);
+	fill(alpha, len - 1, integer);
 	alpha[len] = '\0';
 	return (alpha);
 }
@@ -50,9 +47,14 @@ static void	fill(char *str, int idx, int integer)
 		str[0] = '-';
 		integer = -integer;
 	}
-	str[idx] = '0' + (integer % 10);
-	integer /= 10;
 	if (integer != 0)
+	{
+		str[idx] = '0' + (integer % 10);
+		integer /= 10;
+	}
+	else
+		str[idx] = '0';
+	if (idx > 0)
 		fill(str, idx - 1, integer);
 }
 

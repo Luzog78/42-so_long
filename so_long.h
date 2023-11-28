@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 20:13:16 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/28 11:12:06 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@
 # define TYPE_ZOMBIE	'Z'
 # define TYPES			"PE10CZ"
 
-# define TILE_SIZE			64
+# define TILE_SIZE			48
+# define ITEM_SIZE			32
 # define PLAYER_SIZE		32
-# define MOB_SIZE			32
+# define MOB_SIZE			48
 # define ASSETS_COUNT		1024
 
 typedef long long			t_ll;
@@ -186,6 +187,7 @@ enum e_mlx_masks {
 
 void	ft_arrange_map(t_data *data);
 void	ft_arrange_tile(t_data *data, t_vec2 point);
+int		ft_arrange_wall(t_data *data, t_vec2 pos);
 
 /* ****************************************** */
 /* === ->>  Assets loading functions  <<- === */
@@ -232,6 +234,7 @@ void	ft_post_player_move(t_data *data);
 void	ft_smooth_player_move(t_data *data, int amount);
 void	ft_smooth_mob_move(t_data *data, t_mob *mob, int amount);
 void	ft_post_mob_move(t_data *data, t_mob *mob);
+int		ft_load_asset(t_data *data, int idx, char *path, int amount);
 
 /* ******************************* */
 /* === ->>  get_next_line  <<- === */
@@ -251,6 +254,8 @@ int		ft_parse_height(t_data *data, char *map_path);
 int		ft_parse_line(t_data *data, char *line, int i);
 int		ft_parse_map(t_data *data, int fd);
 int		ft_parse(t_data *data, char *map_path);
+t_bool	ft_check_inverse_dfs(t_data *data, t_vec2 curr,
+			t_vec2 to, t_list_vec2 **list);
 
 /* **************************************** */
 /* === ->>  Miscellanous functions  <<- === */
@@ -274,7 +279,7 @@ int		ft_min(int a, int b);
 int		ft_str_contains(char *str, char c);
 size_t	ft_strlen(char const *str);
 void	ft_free_items(t_tile *items);
-char	*ft_itoa(int integer);
+char	*ft_itoa(int integer, int min_len);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_mobs_add_front(t_mob **mobs, t_mob *new);
 t_mob	*ft_mobs_create(t_data *data, t_vec2 pos, t_mob_type type, int asset);

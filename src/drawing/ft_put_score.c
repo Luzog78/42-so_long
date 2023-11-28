@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 04:14:42 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 05:15:44 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/28 06:33:56 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	ft_put_score(t_data *data)
 	ft_clear_tile(data, (t_vec2){0, 0});
 	ft_clear_tile(data, (t_vec2){1, 0});
 	ft_clear_tile(data, (t_vec2){2, 0});
-	moves = ft_itoa(data->moves);
-	collected = ft_itoa(data->items_collected);
-	count = ft_itoa(data->items_count);
+	moves = ft_itoa(data->moves, 1);
+	collected = ft_itoa(data->items_collected, 1);
+	count = ft_itoa(data->items_count, 1);
 	len = ft_int_len(data->items_collected);
 	color = 0xFFFF00;
 	if (data->items_collected == data->items_count)

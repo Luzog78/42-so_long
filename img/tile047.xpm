@@ -18,7 +18,7 @@ static char *_59cfa17637c469cadc72464e2c0cf06pWKMOSbMudeFsm02[] = {
 "- c #FF3F3F74",
 "; c #FFFCE0A8",
 ": c #FFF83800",
-"> c white",
+"> c #FFFFFFFF",
 /* pixels */
 "      ..XXooXXOO++@@XXXX..      ",
 "      ..XXooXXOO++@@XXXX..      ",

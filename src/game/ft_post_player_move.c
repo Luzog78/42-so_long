@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 07:56:45 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 21:20:32 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/28 11:04:23 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ void	ft_post_player_move(t_data *data)
 	t_mob	*mob;
 
 	data->player = data->smoothing.end;
+	if (data->smoothing.tile2->type == TYPE_ITEM)
+	{
+		ft_grab_item(data, data->smoothing.tile2->item_idx);
+		data->map[data->player.y][data->player.x].has_changed = TRUE;
+	}
+	if (data->smoothing.tile2->type == TYPE_EXIT && data->can_exit)
+		ft_game_quit(data); // WIN !!
 	mob = data->mobs;
 	while (mob)
 	{
