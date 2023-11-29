@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 07:14:05 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 07:41:27 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:20:39 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_game_loop(t_data *data)
 	t_vec2	pos;
 	t_tile	*tile;
 
+	if (data->frames == 1)
+		ft_put_score(data);
 	if (data->frames % 200 == 0)
 	{
 		if (data->smoothing.vec.x != 0 || data->smoothing.vec.y != 0)
@@ -76,8 +78,6 @@ int	ft_game_loop(t_data *data)
 	ft_put_tiles(data);
 	ft_put_mobs(data);
 	ft_put_player(data);
-	if (data->frames % 100 == 0)
-		ft_put_score(data);
 	data->frames++;
 	printf("frames: %llu\n", data->frames);
 	return (0);

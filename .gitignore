@@ -13,4 +13,6 @@ img/*
 !img/water*-*.xpm
 !img/bricks*-*.xpm
 !img/zombie*-*.xpm
+!img/display*-*.xpm
+!img/nums*-*.xpm
 *.sh

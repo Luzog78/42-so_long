@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/28 11:12:06 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 10:44:57 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define TYPE_ZOMBIE	'Z'
 # define TYPES			"PE10CZ"
 
+# define GUI_CASE_SIZE		24
+# define GUI_NBR_SIZE		16
 # define TILE_SIZE			48
 # define ITEM_SIZE			32
 # define PLAYER_SIZE		32
@@ -208,6 +210,7 @@ void	ft_put_blend_frame(t_data *data, t_frame *drawing,
 void	ft_put_blend_pixel(t_data *data, t_vec2 point_win,
 			t_vec2 point_offset, t_ui color);
 void	ft_draw_frame(t_frame *base, t_frame *drawing, t_vec2 point);
+void	ft_put_frame(t_data *data, t_frame *drawing, t_vec2 point);
 void	ft_draw_pixel(t_frame *frame, t_vec2 point, t_ui color);
 void	ft_put_player(t_data *data);
 void	ft_draw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color);

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 07:56:45 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/28 11:04:23 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:13:47 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	ft_post_player_move(t_data *data)
 	}
 	data->player_tile.curr_frame = 0;
 	data->can_move = TRUE;
+	ft_put_score(data);
 }
