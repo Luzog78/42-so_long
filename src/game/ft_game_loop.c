@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 07:14:05 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/28 10:56:52 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 07:41:27 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_game_loop(t_data *data)
 	t_vec2	pos;
 	t_tile	*tile;
 
-	if (data->frames % 100 == 0)
+	if (data->frames % 200 == 0)
 	{
 		if (data->smoothing.vec.x != 0 || data->smoothing.vec.y != 0)
 		{
@@ -31,7 +31,12 @@ int	ft_game_loop(t_data *data)
 		while (mob)
 		{
 			if (mob->smoothing.vec.x != 0 || mob->smoothing.vec.y != 0)
+			{
 				ft_smooth_mob_move(data, mob, 1);
+				if (data->frames % 300 == 0)
+					mob->tile.curr_frame = (mob->tile.curr_frame + 1)
+						% data->assets[mob->tile.asset_idx + mob->dir].tot_frames;
+			}
 			mob = mob->next;
 		}
 	}
