@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 06:20:23 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 15:19:03 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 22:35:38 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_put_player(t_data *data)
 	t_tile	tile;
 	t_frame	frame;
 	t_vec2	point;
-	t_tile	base;
 	t_vec2	ptn_win;
 
 	tile = data->player_tile;
@@ -27,7 +26,6 @@ void	ft_put_player(t_data *data)
 		return ;
 	frame = data->player_assets[data->player_direction].frames[tile.curr_frame];
 	point = data->player;
-	base = data->map[point.y][point.x];
 	ptn_win = ft_get_ptn_win(point, data);
 	ft_put_blend_frame(data, &frame, ptn_win,
 		(t_vec2){(TILE_SIZE - PLAYER_SIZE) / 2, (TILE_SIZE - PLAYER_SIZE) / 2});

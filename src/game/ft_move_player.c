@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 01:58:03 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 11:13:40 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 22:37:26 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ft_move_player(t_data *data, t_direction direction)
 
 static void	ft_end_smoothing(t_data *data, t_vec2 new_pos, t_tile tile)
 {
+	(void) tile;
 	data->moves++;
 	data->can_move = FALSE;
 	data->smoothing.end = new_pos;

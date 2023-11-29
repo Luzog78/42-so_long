@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 08:45:23 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 08:54:22 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:15:47 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	ft_data_init(t_data *data)
 	data->player_tile.curr_frame = 0;
 	data->player_tile.has_changed = TRUE;
 	data->smoothing.vec = (t_vec2){0, 0};
+	data->smoothing.tile1 = NULL;
+	data->smoothing.tile2 = NULL;
 	data->can_move = TRUE;
 	data->items = NULL;
 	data->items_collected = 0;

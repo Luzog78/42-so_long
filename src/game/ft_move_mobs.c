@@ -6,13 +6,14 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 06:49:27 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 14:55:12 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 22:36:58 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 static t_direction	*ft_get_dir(t_mob *mob);
+static void			ft_fill_dirs(t_direction **dirs);
 
 void	ft_move_mobs(t_data *data)
 {
@@ -40,9 +41,7 @@ void	ft_move_mobs(t_data *data)
 
 static t_direction	*ft_get_dir(t_mob *mob)
 {
-	t_direction	dir;
 	t_direction	*dirs;
-	int			i;
 
 	dirs = ft_calloc(4, sizeof(t_direction));
 	if (dirs == NULL)
@@ -54,15 +53,29 @@ static t_direction	*ft_get_dir(t_mob *mob)
 		dirs[3] = DIR_UP;
 	else if (mob->dir == DIR_LEFT)
 		dirs[3] = DIR_RIGHT;
+	ft_fill_dirs(&dirs);
+	return (dirs);
+}
+
+static void	ft_fill_dirs(t_direction **dirs)
+{
+	int			i;
+	t_direction	dir;
+
 	i = 0;
-	dir = rand() % 4;
 	while (i < 3)
 	{
-		if (dir == dirs[3])
-			dir = (dir + 1) % 4;
-		dirs[i] = dir;
-		dir = (dir + 1) % 4;
+		while (1)
+		{
+			dir = rand() % 4;
+			if (dir == (*dirs)[3]
+				|| (i > 0 && dir == (*dirs)[0])
+				|| (i > 1 && dir == (*dirs)[1])
+				|| (i > 2 && dir == (*dirs)[2]))
+				continue ;
+			(*dirs)[i] = dir;
+			break ;
+		}
 		i++;
 	}
-	return (dirs);
 }

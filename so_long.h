@@ -6,34 +6,31 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 10:44:57 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 22:34:34 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include <X11/keysym.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <mlx.h>
-# include <X11/keysym.h>
+# include <math.h>
+# include "mlx.h"
 
 # define NAME			"So Long"
-# define HEIGHT			920
-# define WIDTH			1080
-// # define HEIGHT			480
-// # define WIDTH			720
+# define FRAME_RATE		200
 
 # define TYPE_ENTRY		'P'
 # define TYPE_EXIT		'E'
 # define TYPE_WALL		'1'
 # define TYPE_EMPTY		'0'
 # define TYPE_ITEM		'C'
-# define TYPE_ZOMBIE	'Z'
-# define TYPES			"PE10CZ"
+# define TYPES			"PE10C"
 
 # define GUI_CASE_SIZE		24
 # define GUI_NBR_SIZE		16
@@ -140,6 +137,7 @@ typedef struct s_data {
 	t_vec2		exit;
 	t_bool		can_exit;
 
+	int			difficulty;
 	t_ull		moves;
 	t_ull		frames;
 }	t_data;
@@ -183,6 +181,9 @@ enum e_mlx_masks {
 	MASK_OWNER_GRAB_BUTTON = 1L<<24
 };
 
+void	ft_calc_difficulty(t_data *data);
+void	ft_rand_mob(t_data *data);
+
 /* ******************************************* */
 /* === ->>  Map arrangement functions  <<- === */
 /* ******************************************* */
@@ -196,10 +197,10 @@ int		ft_arrange_wall(t_data *data, t_vec2 pos);
 /* ****************************************** */
 
 int		ft_load_assets(t_data *data);
-int		ft_load_player(t_data *data);
+int		ft_load_player_assets(t_data *data);
 int		ft_load_simple_asset(t_data *data, int idx, char *paths);
-int		ft_load_player_asset(t_data *data, int idx,
-			char *path0, char *path1, char *path2);
+int		ft_load_asset(t_data *data, int idx, char *path, int amount);
+int		ft_load_player_asset(t_data *data, int idx, char *path, int amount);
 
 /* *********************************** */
 /* === ->>  Drawing functions  <<- === */
@@ -237,7 +238,7 @@ void	ft_post_player_move(t_data *data);
 void	ft_smooth_player_move(t_data *data, int amount);
 void	ft_smooth_mob_move(t_data *data, t_mob *mob, int amount);
 void	ft_post_mob_move(t_data *data, t_mob *mob);
-int		ft_load_asset(t_data *data, int idx, char *path, int amount);
+void	ft_open_portal(t_data *data);
 
 /* ******************************* */
 /* === ->>  get_next_line  <<- === */
@@ -287,5 +288,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_mobs_add_front(t_mob **mobs, t_mob *new);
 t_mob	*ft_mobs_create(t_data *data, t_vec2 pos, t_mob_type type, int asset);
 void	ft_free_mobs(t_mob *mobs);
+void	ft_put_ull(t_ull ull);
 
 #endif

@@ -15,4 +15,8 @@ img/*
 !img/zombie*-*.xpm
 !img/display*-*.xpm
 !img/nums*-*.xpm
+!img/front*-*.xpm
+!img/left*-*.xpm
+!img/right*-*.xpm
+!img/back*-*.xpm
 *.sh

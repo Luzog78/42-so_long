@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:21:02 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/25 13:18:45 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 22:41:05 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_error(t_data *data, char *str)
 {
+	(void) data;
 	write(1, str, ft_strlen(str));
 	return (-1);
 }

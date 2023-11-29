@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 06:14:50 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 06:18:15 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:16:50 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ t_mob	*ft_mobs_create(t_data *data, t_vec2 pos, t_mob_type type, int asset)
 	mob->tile.asset_idx = asset;
 	mob->tile.curr_frame = 0;
 	mob->tile.has_changed = TRUE;
+	mob->smoothing.vec = (t_vec2){0, 0};
+	mob->smoothing.tile1 = NULL;
+	mob->smoothing.tile2 = NULL;
 	mob->next = NULL;
 	return (mob);
 }

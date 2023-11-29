@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 07:14:05 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 13:34:52 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 22:35:58 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	ft_game_loop(t_data *data)
 
 	if (data->frames == 1)
 		ft_put_score(data);
-	if (data->frames % 200 == 0)
+	if (data->frames % (2 * FRAME_RATE) == 0)
 	{
 		if (data->smoothing.vec.x != 0 || data->smoothing.vec.y != 0)
 		{
-			ft_smooth_player_move(data, 1);
-			if (data->frames % 1000 == 0)
+			ft_smooth_player_move(data, 2);
+			if (data->frames % (6 * FRAME_RATE) == 0)
 				data->player_tile.curr_frame = (data->player_tile.curr_frame + 1)
 					% data->player_assets[data->player_direction].tot_frames;
 		}
@@ -34,15 +34,15 @@ int	ft_game_loop(t_data *data)
 		{
 			if (mob->smoothing.vec.x != 0 || mob->smoothing.vec.y != 0)
 			{
-				ft_smooth_mob_move(data, mob, 1);
-				if (data->frames % 300 == 0)
+				ft_smooth_mob_move(data, mob, 2);
+				if (data->frames % (6 * FRAME_RATE) == 0)
 					mob->tile.curr_frame = (mob->tile.curr_frame + 1)
 						% data->assets[mob->tile.asset_idx + mob->dir].tot_frames;
 			}
 			mob = mob->next;
 		}
 	}
-	if (data->frames % 5000 == 0 && data->frames != 0)
+	if (data->frames % (60 * FRAME_RATE) == 0 && data->frames != 0)
 	{
 		pos = (t_vec2){0, 0};
 		while (pos.y < data->map_height)
@@ -68,17 +68,27 @@ int	ft_game_loop(t_data *data)
 						tile->has_changed = TRUE;
 					}
 				}
+				if (tile->has_changed)
+				{
+					mob = data->mobs;
+					while (mob)
+					{
+						if (mob->pos.x == pos.x && mob->pos.y == pos.y)
+							mob->tile.has_changed = TRUE;
+						mob = mob->next;
+					}
+				}
 				pos.x++;
 			}
 			pos.y++;
 		}
 	}
-	if (data->frames % 25000 == 0 && data->frames != 0)
+	if (data->frames % (115 * FRAME_RATE) == 0 && data->frames != 0)
 		ft_move_mobs(data);
 	ft_put_tiles(data);
 	ft_put_mobs(data);
 	ft_put_player(data);
 	data->frames++;
-	printf("frames: %llu\n", data->frames);
+	
 	return (0);
 }
