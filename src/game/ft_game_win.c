@@ -1,40 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_map.c                                     :+:      :+:    :+:   */
+/*   ft_game_win.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 10:21:45 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 23:33:22 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/30 00:21:00 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/30 00:21:24 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_parse_map(t_data *data, int fd)
+void	ft_game_win(t_data *data)
 {
-	int		i;
-	char	*line;
-
-	i = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (i >= data->map_height)
-		{
-			free(line);
-			return (ft_error(data, "Error\nLine count error\n"));
-		}
-		if (ft_parse_line(data, line, i) == -1)
-		{
-			free(line);
-			return (-1);
-		}
-		free(line);
-		i++;
-	}
-	return (0);
+	write(1, "Win !\n", 6);
+	ft_game_quit(data);
 }

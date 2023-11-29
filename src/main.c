@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 07:07:27 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 22:16:57 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 23:33:22 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	main(int ac, char **av)
 
 	if (ac <= 1)
 	{
-		write(1, "Error: No map file specified", 28);
+		write(1, "Error\nNo map file specified\n", 28);
 		return (-1);
 	}
 	if (ac > 2)
 	{
-		write(1, "Error: Too many arguments", 25);
+		write(1, "Error\nToo many arguments\n", 25);
 		return (-1);
 	}
 	ft_data_init(&data);

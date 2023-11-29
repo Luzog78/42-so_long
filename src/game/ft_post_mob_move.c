@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:02:20 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 07:40:46 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/30 00:19:28 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_post_mob_move(t_data *data, t_mob *mob)
 			&& mob->pos.y == data->player.y)
 		|| (mob->smoothing.end.x == data->player.x
 			&& mob->smoothing.end.y == data->player.y))
-		ft_game_quit(data); // GAME OVER
+		ft_game_loose(data);
 	mob->pos = mob->smoothing.end;
 	mob->tile.curr_frame = 0;
 }

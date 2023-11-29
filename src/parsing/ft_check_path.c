@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:49:49 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/25 02:32:32 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 23:33:22 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_check_path(t_data *data)
 
 	list = NULL;
 	if (!ft_check_dfs(data, data->entry, data->exit, &list))
-		return (ft_clean(data, &list, "Error: Exit is unreachable\n"));
+		return (ft_clean(data, &list, "Error\nExit is unreachable\n"));
 	ft_free_list_vec2(&list);
 	pos = (t_vec2){0, 0};
 	while (pos.y < data->map_height)
@@ -36,7 +36,7 @@ int	ft_check_path(t_data *data)
 			list = NULL;
 			if (data->map[pos.y][pos.x].type == TYPE_ITEM
 				&& !ft_check_dfs(data, data->entry, pos, &list))
-				return (ft_clean(data, &list, "Error: Item unreachable\n"));
+				return (ft_clean(data, &list, "Error\nItem unreachable\n"));
 			ft_free_list_vec2(&list);
 			pos.x++;
 		}

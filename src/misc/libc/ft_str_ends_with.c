@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_map.c                                     :+:      :+:    :+:   */
+/*   ft_str_ends_with.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 10:21:45 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 23:33:22 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/29 23:23:34 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/29 23:25:28 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_parse_map(t_data *data, int fd)
+t_bool	ft_str_ends_with(char *str, char *end)
 {
-	int		i;
-	char	*line;
+	int	str_len;
+	int	end_len;
 
-	i = 0;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		if (i >= data->map_height)
-		{
-			free(line);
-			return (ft_error(data, "Error\nLine count error\n"));
-		}
-		if (ft_parse_line(data, line, i) == -1)
-		{
-			free(line);
-			return (-1);
-		}
-		free(line);
-		i++;
-	}
-	return (0);
+	str_len = ft_strlen(str);
+	end_len = ft_strlen(end);
+	if (str_len < end_len)
+		return (FALSE);
+	return (!ft_strncmp(str + str_len - end_len, end, end_len));
 }

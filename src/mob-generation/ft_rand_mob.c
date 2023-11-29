@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:31:06 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 17:50:05 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/30 00:41:34 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	ft_rand_mob(t_data *data)
 	t_vec2	pos;
 
 	i = 0;
+	data->difficulty = 0;
+	if (!DO_MOB_SPAWN)
+		return ;
 	ft_calc_difficulty(data);
 	while (i < data->difficulty)
 	{

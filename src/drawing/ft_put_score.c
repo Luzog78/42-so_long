@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 04:14:42 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 13:29:40 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 23:52:58 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,15 @@ void	ft_put_score(t_data *data)
 		asset_count = 15;
 	ft_put_case(data, (t_display){(t_vec2){5, 5}, 3, 12});
 	ft_put_case(data, (t_display){
-			(t_vec2){line - 5 * GUI_CASE_SIZE - 5, 5},
-		5, 12});
+		(t_vec2){line - 5 * GUI_CASE_SIZE - 5, 5}, 5, 12});
 	ft_put_nbr(data, (t_display){(t_vec2){5, 5}, 3, 13}, data->moves);
 	ft_put_nbr(data, (t_display){
-			(t_vec2){line - 5 * GUI_CASE_SIZE - 5, 5},
+		(t_vec2){line - 5 * GUI_CASE_SIZE - 5, 5},
 		2, asset_collected}, data->items_collected);
 	ft_put_slash(data, (t_display){
-			(t_vec2){line - 3 * GUI_CASE_SIZE - 5, 5},
-		1, 13});
+		(t_vec2){line - 3 * GUI_CASE_SIZE - 5, 5}, 1, 13});
 	ft_put_nbr(data, (t_display){
-			(t_vec2){line - 2 * GUI_CASE_SIZE - 5, 5},
+		(t_vec2){line - 2 * GUI_CASE_SIZE - 5, 5},
 		2, asset_count}, data->items_count);
 }
 
@@ -71,7 +69,7 @@ static void	ft_put_nbr(t_data *data, t_display d, int n)
 	int		i;
 
 	p = (t_vec2){d.point.x + (GUI_CASE_SIZE - GUI_NBR_SIZE) / 2 + 2,
-			d.point.y + (GUI_CASE_SIZE - GUI_NBR_SIZE) / 2 + 1};
+		d.point.y + (GUI_CASE_SIZE - GUI_NBR_SIZE) / 2 + 1};
 	i = d.len - 1;
 	while (i >= 0)
 	{
@@ -88,7 +86,7 @@ static void	ft_put_slash(t_data *data, t_display d)
 	int		i;
 
 	p = (t_vec2){d.point.x + (GUI_CASE_SIZE - GUI_NBR_SIZE) / 2 + 2,
-			d.point.y + (GUI_CASE_SIZE - GUI_NBR_SIZE) / 2 + 1};
+		d.point.y + (GUI_CASE_SIZE - GUI_NBR_SIZE) / 2 + 1};
 	i = d.len - 1;
 	while (i >= 0)
 	{

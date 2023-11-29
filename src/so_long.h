@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:44 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 22:34:34 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/30 00:30:57 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,17 @@
 # include <math.h>
 # include "mlx.h"
 
-# define NAME			"So Long"
-# define FRAME_RATE		200
+# ifndef NAME
+#  define NAME			"So Long"
+# endif
+
+# ifndef FRAME_RATE
+#  define FRAME_RATE	500
+# endif
+
+# ifndef DO_MOB_SPAWN
+#  define DO_MOB_SPAWN	1
+# endif
 
 # define TYPE_ENTRY		'P'
 # define TYPE_EXIT		'E'
@@ -181,9 +190,6 @@ enum e_mlx_masks {
 	MASK_OWNER_GRAB_BUTTON = 1L<<24
 };
 
-void	ft_calc_difficulty(t_data *data);
-void	ft_rand_mob(t_data *data);
-
 /* ******************************************* */
 /* === ->>  Map arrangement functions  <<- === */
 /* ******************************************* */
@@ -196,31 +202,31 @@ int		ft_arrange_wall(t_data *data, t_vec2 pos);
 /* === ->>  Assets loading functions  <<- === */
 /* ****************************************** */
 
+int		ft_load_asset(t_data *data, int idx, char *path, int amount);
 int		ft_load_assets(t_data *data);
+int		ft_load_player_asset(t_data *data, int idx, char *path, int amount);
 int		ft_load_player_assets(t_data *data);
 int		ft_load_simple_asset(t_data *data, int idx, char *paths);
-int		ft_load_asset(t_data *data, int idx, char *path, int amount);
-int		ft_load_player_asset(t_data *data, int idx, char *path, int amount);
 
 /* *********************************** */
 /* === ->>  Drawing functions  <<- === */
 /* *********************************** */
 
+void	ft_draw_frame(t_frame *base, t_frame *drawing, t_vec2 point);
+void	ft_draw_pixel(t_frame *frame, t_vec2 point, t_ui color);
+void	ft_draw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color);
 void	ft_put_blend_frame(t_data *data, t_frame *drawing,
 			t_vec2 point_win, t_vec2 point_offset);
 void	ft_put_blend_pixel(t_data *data, t_vec2 point_win,
 			t_vec2 point_offset, t_ui color);
-void	ft_draw_frame(t_frame *base, t_frame *drawing, t_vec2 point);
 void	ft_put_frame(t_data *data, t_frame *drawing, t_vec2 point);
-void	ft_draw_pixel(t_frame *frame, t_vec2 point, t_ui color);
-void	ft_put_player(t_data *data);
-void	ft_draw_rect(t_frame *frame, t_vec2 start, t_vec2 size, t_ui color);
-void	ft_put_tile(t_data *data, t_vec2 point);
-void	ft_put_tiles(t_data *data);
 void	ft_put_item(t_data *data, t_vec2 point, int item_tile_idx);
-void	ft_put_score(t_data *data);
 void	ft_put_mob(t_data *data, t_mob *mob);
 void	ft_put_mobs(t_data *data);
+void	ft_put_player(t_data *data);
+void	ft_put_score(t_data *data);
+void	ft_put_tile(t_data *data, t_vec2 point);
+void	ft_put_tiles(t_data *data);
 
 /* ******************************** */
 /* === ->>  Game functions  <<- === */
@@ -229,16 +235,18 @@ void	ft_put_mobs(t_data *data);
 int		ft_game_init(t_data *data);
 int		ft_game_keydown(int keycode, t_data *data);
 int		ft_game_loop(t_data *data);
+void	ft_game_loose(t_data *data);
 int		ft_game_quit(t_data *data);
-void	ft_move_player(t_data *data, t_direction direction);
+void	ft_game_win(t_data *data);
 void	ft_grab_item(t_data *data, int item_idx);
 t_bool	ft_move_mob(t_data *data, t_mob *mob);
 void	ft_move_mobs(t_data *data);
-void	ft_post_player_move(t_data *data);
-void	ft_smooth_player_move(t_data *data, int amount);
-void	ft_smooth_mob_move(t_data *data, t_mob *mob, int amount);
-void	ft_post_mob_move(t_data *data, t_mob *mob);
+void	ft_move_player(t_data *data, t_direction direction);
 void	ft_open_portal(t_data *data);
+void	ft_post_mob_move(t_data *data, t_mob *mob);
+void	ft_post_player_move(t_data *data);
+void	ft_smooth_mob_move(t_data *data, t_mob *mob, int amount);
+void	ft_smooth_player_move(t_data *data, int amount);
 
 /* ******************************* */
 /* === ->>  get_next_line  <<- === */
@@ -246,11 +254,20 @@ void	ft_open_portal(t_data *data);
 
 char	*get_next_line(int fd);
 
+/* ****************************************** */
+/* === ->>  Mob generation functions  <<- === */
+/* ****************************************** */
+
+void	ft_calc_difficulty(t_data *data);
+void	ft_rand_mob(t_data *data);
+
 /* *********************************** */
 /* === ->>  Parsing functions  <<- === */
 /* *********************************** */
 
 t_bool	ft_check_dfs(t_data *data, t_vec2 curr, t_vec2 to, t_list_vec2 **list);
+t_bool	ft_check_inverse_dfs(t_data *data, t_vec2 curr,
+			t_vec2 to, t_list_vec2 **list);
 int		ft_check_map(t_data *data);
 int		ft_check_path(t_data *data);
 int		ft_parse_char(t_data *data, char c, int i, int j);
@@ -258,36 +275,43 @@ int		ft_parse_height(t_data *data, char *map_path);
 int		ft_parse_line(t_data *data, char *line, int i);
 int		ft_parse_map(t_data *data, int fd);
 int		ft_parse(t_data *data, char *map_path);
-t_bool	ft_check_inverse_dfs(t_data *data, t_vec2 curr,
-			t_vec2 to, t_list_vec2 **list);
 
 /* **************************************** */
 /* === ->>  Miscellanous functions  <<- === */
 /* **************************************** */
 
+// Color
 t_ui	ft_argb(int a, int r, int g, int b);
 t_ui	ft_blend(t_ui a, t_ui b);
-void	*ft_calloc(size_t count, size_t size);
 t_ui	ft_color_progression(int i, int max);
-void	ft_data_init(t_data *data);
 t_ui	ft_grad_color(int i, int max, t_ui color1, t_ui color2);
-void	ft_list_vec2_add_front(t_list_vec2 **list, t_vec2 vec);
-t_bool	ft_list_vec2_contains(t_list_vec2 *list, t_vec2 vec);
-int		ft_error(t_data *data, char *str);
+
+// Free
 void	ft_free_assets(t_data *data);
+void	ft_free_items(t_tile *items);
 void	ft_free_list_vec2(t_list_vec2 **list);
 void	ft_free_map(t_tile **map);
+void	ft_free_mobs(t_mob *mobs);
 void	ft_free_player(t_data *data);
+
+// Libc
+void	*ft_calloc(size_t count, size_t size);
+char	*ft_itoa(int integer, int min_len);
 int		ft_max(int a, int b);
 int		ft_min(int a, int b);
+void	ft_put_ull(t_ull ull);
 int		ft_str_contains(char *str, char c);
-size_t	ft_strlen(char const *str);
-void	ft_free_items(t_tile *items);
-char	*ft_itoa(int integer, int min_len);
+t_bool	ft_str_ends_with(char *str, char *end);
 char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(char const *str);
+int		ft_strncmp(char *s1, char *s2, int n);
+
+// Others
+void	ft_data_init(t_data *data);
+int		ft_error(t_data *data, char *str);
+void	ft_list_vec2_add_front(t_list_vec2 **list, t_vec2 vec);
+t_bool	ft_list_vec2_contains(t_list_vec2 *list, t_vec2 vec);
 void	ft_mobs_add_front(t_mob **mobs, t_mob *new);
 t_mob	*ft_mobs_create(t_data *data, t_vec2 pos, t_mob_type type, int asset);
-void	ft_free_mobs(t_mob *mobs);
-void	ft_put_ull(t_ull ull);
 
 #endif

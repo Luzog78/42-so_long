@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:21:03 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/25 03:00:13 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 23:33:22 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	ft_parse_line(t_data *data, char *line, int i)
 	if (data->map_width == -1)
 		data->map_width = j;
 	if (data->map_width != j)
-		return (ft_error(data, "Error: Map is not rectangular\n"));
+		return (ft_error(data, "Error\nMap is not rectangular\n"));
 	data->map[i] = ft_calloc(data->map_width + 1, sizeof(t_tile));
 	if (!data->map)
-		return (ft_error(data, "Error: Cannot allocate memory for the map\n"));
+		return (ft_error(data, "Error\nCannot allocate memory for the map\n"));
 	j = 0;
 	while (line[j] && line[j] != '\n')
 	{
@@ -34,7 +34,7 @@ int	ft_parse_line(t_data *data, char *line, int i)
 		j++;
 	}
 	if (data->map_width != j || line[j] != '\n')
-		return (ft_error(data, "Error: Map is not rectangular\n"));
+		return (ft_error(data, "Error\nMap is not rectangular\n"));
 	return (1);
 }
 

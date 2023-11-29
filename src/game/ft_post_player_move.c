@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 07:56:45 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 17:33:14 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/30 00:19:14 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	ft_post_player_move(t_data *data)
 		data->map[data->player.y][data->player.x].has_changed = TRUE;
 	}
 	if (data->smoothing.tile2->type == TYPE_EXIT && data->can_exit)
-		ft_game_quit(data);
+		ft_game_win(data);
 	mob = data->mobs;
 	while (mob)
 	{
 		if (mob->pos.x == data->player.x
 			&& mob->pos.y == data->player.y)
-			ft_game_quit(data);
+			ft_game_loose(data);
 		mob = mob->next;
 	}
 	data->player_tile.curr_frame = 0;

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:52:08 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/27 01:52:31 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 23:51:10 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ void	ft_put_blend_frame(t_data *data, t_frame *drawing,
 			dst = drawing->addr + (pos.y * drawing->line_size
 					+ pos.x * (drawing->bits_per_pixel / 8));
 			color = *(t_ui *) dst;
-			/*color = (*(t_ui *) dst) | (0xFF << 24);
-			if (*(t_ui *) dst == 0xFF000000 || *(t_ui *) dst == 0xFF080808)
-				color = 0;*/
 			ft_put_blend_pixel(data, (t_vec2){pos.x + point_win.x,
 				pos.y + point_win.y}, point_offset, color);
 			pos.x++;

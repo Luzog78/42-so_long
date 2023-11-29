@@ -6,14 +6,15 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/16 07:59:02 by ysabik            #+#    #+#              #
-#    Updated: 2023/11/29 22:47:47 by ysabik           ###   ########.fr        #
+#    Updated: 2023/11/30 00:40:42 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC					= cc
-CFLAGS				= -Werror -Wall -Wextra -g -lm -I . \
+CC					= gcc
+CFLAGS				= -Werror -Wall -Wextra -g -lm -I ./src \
 						-I ./minilibx-linux -L ./minilibx-linux \
 						-lmlx_Linux -lXext -lX11
+CUSTOM_FLAGS		= # -D FRAME_RATE=500 -D DO_MOB_SPAWN=1
 NAME				= so_long
 SRC_FILES			= \
 						src/arrangement/ft_arrange_map.c \
@@ -22,7 +23,6 @@ SRC_FILES			= \
 						\
 						src/assets/ft_load_asset.c \
 						src/assets/ft_load_assets.c \
-						src/assets/ft_load_frame.c \
 						src/assets/ft_load_player_asset.c \
 						src/assets/ft_load_player_assets.c \
 						src/assets/ft_load_simple_asset.c \
@@ -44,7 +44,9 @@ SRC_FILES			= \
 						src/game/ft_game_init.c \
 						src/game/ft_game_keydown.c \
 						src/game/ft_game_loop.c \
+						src/game/ft_game_loose.c \
 						src/game/ft_game_quit.c \
+						src/game/ft_game_win.c \
 						src/game/ft_grab_item.c \
 						src/game/ft_move_mob.c \
 						src/game/ft_move_mobs.c \
@@ -76,8 +78,10 @@ SRC_FILES			= \
 						src/misc/libc/ft_min.c \
 						src/misc/libc/ft_put_ull.c \
 						src/misc/libc/ft_str_contains.c \
+						src/misc/libc/ft_str_ends_with.c \
 						src/misc/libc/ft_strjoin.c \
 						src/misc/libc/ft_strlen.c \
+						src/misc/libc/ft_strncmp.c \
 						\
 						src/misc/ft_data_init.c \
 						src/misc/ft_error.c \
@@ -99,18 +103,18 @@ SRC_FILES			= \
 						src/parsing/ft_parse_line.c \
 						src/parsing/ft_parse_map.c \
 						\
-						main.c
+						src/main.c
 OBJ_FILES			= $(SRC_FILES:.c=.o)
 
 all : $(NAME)
 
 $(NAME) : $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES)
+	$(CC) $(OBJ_FILES) -o $(NAME) $(CFLAGS) $(CUSTOM_FLAGS)
 
 bonus : all
 
 .c.o :
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CUSTOM_FLAGS) -c $< -o $@
 
 clean :
 	rm -rf $(OBJ_FILES)

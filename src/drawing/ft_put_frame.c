@@ -6,13 +6,13 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 16:52:08 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 10:58:42 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 23:53:23 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_put_frame(t_data* data, t_frame *drawing, t_vec2 point)
+void	ft_put_frame(t_data *data, t_frame *drawing, t_vec2 point)
 {
 	t_vec2	pos;
 	char	*dst;

@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_height.c                                  :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 17:30:04 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 23:33:22 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/29 23:24:18 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/29 23:25:34 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_parse_height(t_data *data, char *map_path)
+int	ft_strncmp(char *s1, char *s2, int n)
 {
-	int		fd;
-	char	buf;
-	int		result;
+	int	i;
 
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-		return (ft_error(data, "Error\nCannot open the map file\n"));
-	result = 1;
-	while (result)
-	{
-		result = read(fd, &buf, 1);
-		if (result == -1)
-		{
-			close(fd);
-			return (ft_error(data, "Error\nCannot read the map file\n"));
-		}
-		if (result && buf == '\n')
-			data->map_height++;
-	}
-	close(fd);
+	i = 0;
+	while (i < n && s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	if (i < n)
+		return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 	return (0);
 }
