@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 04:14:42 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 13:11:52 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/29 13:29:40 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,16 @@ static void	ft_put_slash(t_data *data, t_display d);
 void	ft_put_score(t_data *data)
 {
 	int	line;
+	int	asset_collected;
+	int	asset_count;
 
 	line = data->map_width * TILE_SIZE;
+	asset_collected = 16;
+	if (data->items_collected == data->items_count)
+		asset_collected = 15;
+	asset_count = 14;
+	if (data->items_collected == data->items_count)
+		asset_count = 15;
 	ft_put_case(data, (t_display){(t_vec2){5, 5}, 3, 12});
 	ft_put_case(data, (t_display){
 			(t_vec2){line - 5 * GUI_CASE_SIZE - 5, 5},
@@ -35,13 +43,13 @@ void	ft_put_score(t_data *data)
 	ft_put_nbr(data, (t_display){(t_vec2){5, 5}, 3, 13}, data->moves);
 	ft_put_nbr(data, (t_display){
 			(t_vec2){line - 5 * GUI_CASE_SIZE - 5, 5},
-		2, 14}, data->items_collected);
+		2, asset_collected}, data->items_collected);
 	ft_put_slash(data, (t_display){
 			(t_vec2){line - 3 * GUI_CASE_SIZE - 5, 5},
 		1, 13});
 	ft_put_nbr(data, (t_display){
 			(t_vec2){line - 2 * GUI_CASE_SIZE - 5, 5},
-		2, 15}, data->items_count);
+		2, asset_count}, data->items_count);
 }
 
 static void	ft_put_case(t_data *data, t_display d)
