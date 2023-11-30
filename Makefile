@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/16 07:59:02 by ysabik            #+#    #+#              #
-#    Updated: 2023/11/30 00:40:42 by ysabik           ###   ########.fr        #
+#    Updated: 2023/11/30 01:21:19 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC					= gcc
 CFLAGS				= -Werror -Wall -Wextra -g -lm -I ./src \
 						-I ./minilibx-linux -L ./minilibx-linux \
 						-lmlx_Linux -lXext -lX11
-CUSTOM_FLAGS		= # -D FRAME_RATE=500 -D DO_MOB_SPAWN=1
+CUSTOM_FLAGS		= -D FRAME_RATE=500 -D DO_MOB_SPAWN=1
 NAME				= so_long
 SRC_FILES			= \
 						src/arrangement/ft_arrange_map.c \

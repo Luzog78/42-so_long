@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:21:03 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/29 23:33:22 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:27:26 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_parse_line(t_data *data, char *line, int i)
 			return (-1);
 		j++;
 	}
-	if (data->map_width != j || line[j] != '\n')
+	if (data->map_width != j)
 		return (ft_error(data, "Error\nMap is not rectangular\n"));
 	return (1);
 }
